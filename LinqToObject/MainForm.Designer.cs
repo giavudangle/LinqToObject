@@ -51,7 +51,6 @@
             this.btnGroupByStandardID_Descending = new System.Windows.Forms.Button();
             this.btnGroupStandardID_Ascending = new System.Windows.Forms.Button();
             this.dataResult = new System.Windows.Forms.DataGridView();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.btn_Select_StudentAge = new System.Windows.Forms.Button();
             this.btn_Select_StudentName = new System.Windows.Forms.Button();
@@ -65,6 +64,19 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.btnGroupName = new System.Windows.Forms.RadioButton();
+            this.btnGroupStanID = new System.Windows.Forms.RadioButton();
+            this.btnGroupAge = new System.Windows.Forms.RadioButton();
+            this.btnGroupStuID = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.Join = new System.Windows.Forms.GroupBox();
+            this.btnLeftJoin = new System.Windows.Forms.Button();
+            this.btnRightJoin = new System.Windows.Forms.Button();
+            this.btnInnerJoin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataDisplay)).BeginInit();
             this.groupbox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -74,24 +86,23 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataResult)).BeginInit();
             this.groupBox7.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.Join.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataDisplay
             // 
-            this.dataDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataDisplay.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.dataDisplay.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dataDisplay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataDisplay.Location = new System.Drawing.Point(2, 1);
+            this.dataDisplay.Location = new System.Drawing.Point(0, 12);
             this.dataDisplay.Name = "dataDisplay";
-            this.dataDisplay.Size = new System.Drawing.Size(456, 386);
+            this.dataDisplay.Size = new System.Drawing.Size(468, 304);
             this.dataDisplay.TabIndex = 0;
             // 
             // groupbox
             // 
-            this.groupbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupbox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupbox.Controls.Add(this.btnEqual);
             this.groupbox.Controls.Add(this.btnLesser);
             this.groupbox.Controls.Add(this.btnGreater);
@@ -100,16 +111,16 @@
             this.groupbox.Controls.Add(this.txtStandardID);
             this.groupbox.Controls.Add(this.txtAge);
             this.groupbox.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.groupbox.Location = new System.Drawing.Point(518, 197);
+            this.groupbox.Location = new System.Drawing.Point(518, 198);
             this.groupbox.Name = "groupbox";
-            this.groupbox.Size = new System.Drawing.Size(441, 110);
+            this.groupbox.Size = new System.Drawing.Size(472, 107);
             this.groupbox.TabIndex = 5;
             this.groupbox.TabStop = false;
             this.groupbox.Text = "Multi Select - Where Operator";
             // 
             // btnEqual
             // 
-            this.btnEqual.Location = new System.Drawing.Point(267, 76);
+            this.btnEqual.Location = new System.Drawing.Point(316, 69);
             this.btnEqual.Name = "btnEqual";
             this.btnEqual.Size = new System.Drawing.Size(67, 23);
             this.btnEqual.TabIndex = 6;
@@ -119,7 +130,7 @@
             // 
             // btnLesser
             // 
-            this.btnLesser.Location = new System.Drawing.Point(267, 48);
+            this.btnLesser.Location = new System.Drawing.Point(316, 41);
             this.btnLesser.Name = "btnLesser";
             this.btnLesser.Size = new System.Drawing.Size(67, 23);
             this.btnLesser.TabIndex = 5;
@@ -129,7 +140,7 @@
             // 
             // btnGreater
             // 
-            this.btnGreater.Location = new System.Drawing.Point(267, 19);
+            this.btnGreater.Location = new System.Drawing.Point(316, 12);
             this.btnGreater.Name = "btnGreater";
             this.btnGreater.Size = new System.Drawing.Size(67, 23);
             this.btnGreater.TabIndex = 4;
@@ -140,7 +151,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 70);
+            this.label2.Location = new System.Drawing.Point(15, 66);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 3;
@@ -149,7 +160,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 34);
+            this.label1.Location = new System.Drawing.Point(15, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 2;
@@ -157,16 +168,16 @@
             // 
             // txtStandardID
             // 
-            this.txtStandardID.Location = new System.Drawing.Point(79, 67);
+            this.txtStandardID.Location = new System.Drawing.Point(106, 63);
             this.txtStandardID.Name = "txtStandardID";
-            this.txtStandardID.Size = new System.Drawing.Size(155, 20);
+            this.txtStandardID.Size = new System.Drawing.Size(166, 20);
             this.txtStandardID.TabIndex = 1;
             // 
             // txtAge
             // 
-            this.txtAge.Location = new System.Drawing.Point(79, 31);
+            this.txtAge.Location = new System.Drawing.Point(106, 19);
             this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(155, 20);
+            this.txtAge.Size = new System.Drawing.Size(166, 20);
             this.txtAge.TabIndex = 0;
             // 
             // groupBox1
@@ -178,12 +189,13 @@
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(518, 313);
+            this.groupBox1.ForeColor = System.Drawing.Color.Red;
+            this.groupBox1.Location = new System.Drawing.Point(518, 430);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(441, 233);
+            this.groupBox1.Size = new System.Drawing.Size(472, 216);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Group By - Sorting";
+            this.groupBox1.Text = "Sorting";
             // 
             // groupBox4
             // 
@@ -191,7 +203,7 @@
             this.groupBox4.Controls.Add(this.btnGroupStudentName_Descending);
             this.groupBox4.Controls.Add(this.btnGroupStudentName_Ascending);
             this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox4.Location = new System.Drawing.Point(9, 137);
+            this.groupBox4.Location = new System.Drawing.Point(33, 117);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(187, 90);
             this.groupBox4.TabIndex = 5;
@@ -224,7 +236,7 @@
             this.groupBox3.Controls.Add(this.btnGroupStudentAge_Descending);
             this.groupBox3.Controls.Add(this.btnGroupStudentAge_Ascending);
             this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox3.Location = new System.Drawing.Point(218, 137);
+            this.groupBox3.Location = new System.Drawing.Point(242, 117);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(196, 90);
             this.groupBox3.TabIndex = 5;
@@ -257,7 +269,7 @@
             this.groupBox5.Controls.Add(this.btnGroupStudentID_Descending);
             this.groupBox5.Controls.Add(this.btnGroupStudentID_Ascending);
             this.groupBox5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox5.Location = new System.Drawing.Point(218, 29);
+            this.groupBox5.Location = new System.Drawing.Point(242, 19);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(196, 92);
             this.groupBox5.TabIndex = 5;
@@ -290,7 +302,7 @@
             this.groupBox2.Controls.Add(this.btnGroupByStandardID_Descending);
             this.groupBox2.Controls.Add(this.btnGroupStandardID_Ascending);
             this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox2.Location = new System.Drawing.Point(9, 29);
+            this.groupBox2.Location = new System.Drawing.Point(33, 19);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(187, 92);
             this.groupBox2.TabIndex = 4;
@@ -319,26 +331,17 @@
             // 
             // dataResult
             // 
-            this.dataResult.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataResult.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.dataResult.BackgroundColor = System.Drawing.SystemColors.Info;
             this.dataResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataResult.Location = new System.Drawing.Point(2, 393);
+            this.dataResult.Location = new System.Drawing.Point(12, 346);
             this.dataResult.Name = "dataResult";
-            this.dataResult.Size = new System.Drawing.Size(456, 391);
+            this.dataResult.Size = new System.Drawing.Size(456, 300);
             this.dataResult.TabIndex = 7;
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Location = new System.Drawing.Point(518, 565);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(441, 219);
-            this.groupBox6.TabIndex = 8;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "LRI Join - Nested Query";
             // 
             // groupBox7
             // 
+            this.groupBox7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.groupBox7.Controls.Add(this.btn_Select_StudentAge);
             this.groupBox7.Controls.Add(this.btn_Select_StudentName);
             this.groupBox7.Controls.Add(this.btn_Select_StandardID);
@@ -351,9 +354,10 @@
             this.groupBox7.Controls.Add(this.label5);
             this.groupBox7.Controls.Add(this.label4);
             this.groupBox7.Controls.Add(this.label3);
-            this.groupBox7.Location = new System.Drawing.Point(518, 13);
+            this.groupBox7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.groupBox7.Location = new System.Drawing.Point(518, 12);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(441, 178);
+            this.groupBox7.Size = new System.Drawing.Size(472, 180);
             this.groupBox7.TabIndex = 9;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Single Select -Where Operator";
@@ -421,7 +425,7 @@
             // 
             // txtStudentID
             // 
-            this.txtStudentID.Location = new System.Drawing.Point(106, 27);
+            this.txtStudentID.Location = new System.Drawing.Point(106, 29);
             this.txtStudentID.Name = "txtStudentID";
             this.txtStudentID.Size = new System.Drawing.Size(166, 20);
             this.txtStudentID.TabIndex = 11;
@@ -462,17 +466,161 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Student ID :";
             // 
+            // groupBox8
+            // 
+            this.groupBox8.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.groupBox8.Controls.Add(this.btnGroupName);
+            this.groupBox8.Controls.Add(this.btnGroupStanID);
+            this.groupBox8.Controls.Add(this.btnGroupAge);
+            this.groupBox8.Controls.Add(this.btnGroupStuID);
+            this.groupBox8.Controls.Add(this.label10);
+            this.groupBox8.Controls.Add(this.label9);
+            this.groupBox8.Controls.Add(this.label8);
+            this.groupBox8.Controls.Add(this.label7);
+            this.groupBox8.ForeColor = System.Drawing.Color.DarkBlue;
+            this.groupBox8.Location = new System.Drawing.Point(518, 311);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(301, 113);
+            this.groupBox8.TabIndex = 10;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Group by";
+            // 
+            // btnGroupName
+            // 
+            this.btnGroupName.AutoSize = true;
+            this.btnGroupName.Location = new System.Drawing.Point(227, 35);
+            this.btnGroupName.Name = "btnGroupName";
+            this.btnGroupName.Size = new System.Drawing.Size(14, 13);
+            this.btnGroupName.TabIndex = 11;
+            this.btnGroupName.TabStop = true;
+            this.btnGroupName.UseVisualStyleBackColor = true;
+            this.btnGroupName.CheckedChanged += new System.EventHandler(this.btnGroupName_CheckedChanged);
+            // 
+            // btnGroupStanID
+            // 
+            this.btnGroupStanID.AutoSize = true;
+            this.btnGroupStanID.Location = new System.Drawing.Point(99, 76);
+            this.btnGroupStanID.Name = "btnGroupStanID";
+            this.btnGroupStanID.Size = new System.Drawing.Size(14, 13);
+            this.btnGroupStanID.TabIndex = 10;
+            this.btnGroupStanID.TabStop = true;
+            this.btnGroupStanID.UseVisualStyleBackColor = true;
+            this.btnGroupStanID.CheckedChanged += new System.EventHandler(this.btnGroupStanID_CheckedChanged);
+            // 
+            // btnGroupAge
+            // 
+            this.btnGroupAge.AutoSize = true;
+            this.btnGroupAge.Location = new System.Drawing.Point(227, 76);
+            this.btnGroupAge.Name = "btnGroupAge";
+            this.btnGroupAge.Size = new System.Drawing.Size(14, 13);
+            this.btnGroupAge.TabIndex = 9;
+            this.btnGroupAge.TabStop = true;
+            this.btnGroupAge.UseVisualStyleBackColor = true;
+            this.btnGroupAge.CheckedChanged += new System.EventHandler(this.btnGroupAge_CheckedChanged);
+            // 
+            // btnGroupStuID
+            // 
+            this.btnGroupStuID.AutoSize = true;
+            this.btnGroupStuID.Location = new System.Drawing.Point(99, 35);
+            this.btnGroupStuID.MaximumSize = new System.Drawing.Size(50, 50);
+            this.btnGroupStuID.Name = "btnGroupStuID";
+            this.btnGroupStuID.Size = new System.Drawing.Size(14, 13);
+            this.btnGroupStuID.TabIndex = 8;
+            this.btnGroupStuID.TabStop = true;
+            this.btnGroupStuID.UseVisualStyleBackColor = true;
+            this.btnGroupStuID.CheckedChanged += new System.EventHandler(this.btnGroupStuID_CheckedChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(133, 76);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "Student Age :";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(133, 35);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Student Name :";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(16, 76);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(70, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Standard ID :";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 35);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(64, 13);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "Student ID :";
+            // 
+            // Join
+            // 
+            this.Join.Controls.Add(this.btnInnerJoin);
+            this.Join.Controls.Add(this.btnRightJoin);
+            this.Join.Controls.Add(this.btnLeftJoin);
+            this.Join.ForeColor = System.Drawing.Color.BlueViolet;
+            this.Join.Location = new System.Drawing.Point(834, 311);
+            this.Join.Name = "Join";
+            this.Join.Size = new System.Drawing.Size(156, 113);
+            this.Join.TabIndex = 11;
+            this.Join.TabStop = false;
+            this.Join.Text = "Join";
+            // 
+            // btnLeftJoin
+            // 
+            this.btnLeftJoin.Location = new System.Drawing.Point(6, 19);
+            this.btnLeftJoin.Name = "btnLeftJoin";
+            this.btnLeftJoin.Size = new System.Drawing.Size(144, 23);
+            this.btnLeftJoin.TabIndex = 0;
+            this.btnLeftJoin.Text = "Left Join";
+            this.btnLeftJoin.UseVisualStyleBackColor = true;
+            this.btnLeftJoin.Click += new System.EventHandler(this.btnLeftJoin_Click);
+            // 
+            // btnRightJoin
+            // 
+            this.btnRightJoin.Location = new System.Drawing.Point(6, 48);
+            this.btnRightJoin.Name = "btnRightJoin";
+            this.btnRightJoin.Size = new System.Drawing.Size(144, 23);
+            this.btnRightJoin.TabIndex = 1;
+            this.btnRightJoin.Text = "Right Join";
+            this.btnRightJoin.UseVisualStyleBackColor = true;
+            this.btnRightJoin.Click += new System.EventHandler(this.btnRightJoin_Click);
+            // 
+            // btnInnerJoin
+            // 
+            this.btnInnerJoin.Location = new System.Drawing.Point(6, 76);
+            this.btnInnerJoin.Name = "btnInnerJoin";
+            this.btnInnerJoin.Size = new System.Drawing.Size(144, 23);
+            this.btnInnerJoin.TabIndex = 2;
+            this.btnInnerJoin.Text = "Inner Join";
+            this.btnInnerJoin.UseVisualStyleBackColor = true;
+            this.btnInnerJoin.Click += new System.EventHandler(this.btnInnerJoin_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(971, 796);
+            this.ClientSize = new System.Drawing.Size(1002, 672);
+            this.Controls.Add(this.Join);
+            this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
-            this.Controls.Add(this.groupBox6);
-            this.Controls.Add(this.dataResult);
+            this.Controls.Add(this.dataDisplay);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupbox);
-            this.Controls.Add(this.dataDisplay);
+            this.Controls.Add(this.dataResult);
             this.Name = "MainForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataDisplay)).EndInit();
@@ -486,6 +634,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataResult)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.Join.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -514,7 +665,6 @@
         private System.Windows.Forms.Button btnGroupStudentAge_Ascending;
         private System.Windows.Forms.Button btnGroupStudentID_Descending;
         private System.Windows.Forms.Button btnGroupStudentID_Ascending;
-        private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -528,6 +678,19 @@
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtStdardID;
         private System.Windows.Forms.TextBox txtStudentID;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.RadioButton btnGroupStuID;
+        private System.Windows.Forms.RadioButton btnGroupName;
+        private System.Windows.Forms.RadioButton btnGroupStanID;
+        private System.Windows.Forms.RadioButton btnGroupAge;
+        private System.Windows.Forms.GroupBox Join;
+        private System.Windows.Forms.Button btnInnerJoin;
+        private System.Windows.Forms.Button btnRightJoin;
+        private System.Windows.Forms.Button btnLeftJoin;
     }
 }
 

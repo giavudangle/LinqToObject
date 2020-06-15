@@ -26,6 +26,8 @@ namespace LinqToObject
                 new Student() { StudentID = 3, StudentName = "Bill",  Age = 18, StandardID = 2 } ,
                 new Student() { StudentID = 4, StudentName = "Ram" , Age = 20, StandardID = 2 } ,
                 new Student() { StudentID = 4, StudentName = "Gaga" , Age = 20, StandardID = 2 },
+                new Student() { StudentID = 3, StudentName = "Gaga" , Age = 20, StandardID = 2 },
+                new Student() { StudentID = 3, StudentName = "Haga" , Age = 20, StandardID = 10 },
                 new Student() { StudentID = 5, StudentName = "Ron" , Age = 21 }
         };
 
@@ -112,6 +114,41 @@ namespace LinqToObject
         {
             SingleFilterStudentAge();
         }
+        private void btnGroupStuID_CheckedChanged(object sender, EventArgs e)
+        {
+            GroupByStudentID();
+        }
+
+        private void btnGroupName_CheckedChanged(object sender, EventArgs e)
+        {
+            GroupByStudentName();
+        }
+
+        private void btnGroupStanID_CheckedChanged(object sender, EventArgs e)
+        {
+            GroupByStandardID();
+        }
+
+        private void btnGroupAge_CheckedChanged(object sender, EventArgs e)
+        {
+            GroupByStudentAge();
+        }
+
+        private void btnLeftJoin_Click(object sender, EventArgs e)
+        {
+            LeftJoin();
+        }
+
+        private void btnRightJoin_Click(object sender, EventArgs e)
+        {
+            RightJoin();
+        }
+
+        private void btnInnerJoin_Click(object sender, EventArgs e)
+        {
+            InnerJoin();
+        }
+
 
         #endregion
 
@@ -134,8 +171,7 @@ namespace LinqToObject
         }
       
         #endregion
-
-        #region Single Select
+        #region Single Select - Where Operator
         private void SingleFilterStudentID()
         {           
             if (txtStudentID.Text != "")
@@ -227,7 +263,7 @@ namespace LinqToObject
 
 
         #endregion
-        #region MultiSelect - Compare
+        #region Multi Select - Compare
 
         private void GreaterCompare()
         {
@@ -299,7 +335,7 @@ namespace LinqToObject
             }
         }
         #endregion
-        #region Groupby and Orderby
+        #region Order by - Sort
         private void GroupAndSort_StandardID_Ascending()
         {
             /* Cũng có thể dùng Query Expression như comment
@@ -325,6 +361,8 @@ namespace LinqToObject
             //                          Age = sg.First().Age
             //                      };
 
+
+            /*Tôi k muốn lấy những Standard ID <=0*/
             ControlDataResult(null);
             var groupByStandardID_Ascending =
                 StudentList
@@ -370,8 +408,6 @@ namespace LinqToObject
                 .OrderByDescending(item => item.StandardID);
             ControlDataResult(groupByStandardID_Descending.ToList());
         }
-
-
         private void GroupAndSort_StudentID_Ascending()
         {
             ControlDataResult(null);
@@ -388,14 +424,13 @@ namespace LinqToObject
                 .Select(group => new
                 {
                     StudentID = group.First().StudentID,
-                    StandardID = group.Key.standardID,
+                    StandardID = group.First().StandardID,
                     Name = group.Key.name,
                     Age = group.Key.age,
                 })
-                .OrderBy(item => item.StudentID);
-            ControlDataResult(groupByStudentId_Ascending.ToList());
+               .OrderBy(item => item.StudentID);        
+            ControlDataResult(groupByStudentId_Ascending.ToList());      
         }
-
         private void GroupAndSort_StudentID_Descending()
         {
             ControlDataResult(null);
@@ -512,9 +547,152 @@ namespace LinqToObject
                 .OrderByDescending(item => item.Age);
             ControlDataResult(groupByStudentAge_Ascending.ToList());
         }
-        #endregion
-       
 
+        #endregion
+        #region Group by
+        private void GroupByStudentID()
+        {
+            ControlDataResult(null);
+            if (btnGroupStuID.Checked) {
+                var rawData =
+                    from s in StudentList
+                    group s by s.StudentID;
+
+
+                var result =
+                    from r in rawData
+                    select new
+                    {
+                        StudentID = r.Key,
+                        Amount = r.Count()
+                    };
+                ControlDataResult(result.ToList());
+            }
+        }
+
+        private void GroupByStudentName()
+        {
+            ControlDataResult(null);
+            if (btnGroupName.Checked)
+            {
+                var rawData =
+                    from s in StudentList
+                    group s by s.StudentName;
+
+
+                var result =
+                    from r in rawData
+                    select new
+                    {
+                        StudentName = r.Key,
+                        Amount = r.Count()
+                    };
+                ControlDataResult(result.ToList());
+            }
+        }
+
+        private void GroupByStandardID()
+        {
+            ControlDataResult(null);
+            if (btnGroupStanID.Checked)
+            {
+                var rawData = StudentList.GroupBy(s => s.StandardID);
+                var res = rawData.Select(s => new
+                {
+                    StandardID = s.Key,
+                    Amount = s.Count()
+                });
+                ControlDataResult(res.ToList());
+            }           
+        }
+
+        private void GroupByStudentAge()
+        {
+            ControlDataResult(null);
+            if (btnGroupAge.Checked)
+            {
+                var rawData = StudentList.GroupBy(s => s.Age);
+                var res = rawData.Select(s => new
+                {
+                    StudentAge = s.Key,
+                    Amount = s.Count()
+                });
+                ControlDataResult(res.ToList());
+            }
+        }
+
+
+
+
+        #endregion
+
+        #region Left-Right(Outer Join) - Inner Join
+
+        private void LeftJoin()
+        {
+
+            // Left Outer Join
+            /* Cho sta chạy trong StandardList,s trong StudentList
+             * join sta.StandList match với s.StandardID
+             * thành 1 collections mới nhét vào record
+             * cho s chạy trong record (để mặc định nếu record empty)
+             * select new collections pass về res
+             */
+
+            ControlDataResult(null);
+            var joinResult = from sta in StandardList
+                             join s in StudentList
+                             on sta.StandardID equals s.StandardID
+                             into record
+                                 from s in record.DefaultIfEmpty()
+                                 select new
+                                 {
+                                     StandardName = sta.StandardName,
+                                     StudentName = s == null
+                                     ? "Not matching"
+                                     : s.StudentName
+                                 };
+            ControlDataResult(joinResult.ToList());
+        }
+
+        private void RightJoin()
+        {
+            ControlDataResult(null);
+            var res = StudentList
+                .GroupJoin(
+                StandardList,
+                stu => stu.StandardID,
+                sta => sta.StandardID,
+                (stu, staGroup) => new
+                {
+                    stu = stu,
+                    staGroup = staGroup
+                })                
+                .SelectMany(
+                    temp => temp.staGroup.DefaultIfEmpty(),
+                    (temp, sta) => new
+                    {
+                        StandardName = (sta == null) ? "Not Matching" : sta.StandardName,
+                        StudentName = temp.stu.StudentName
+                    }
+                );                              
+            ControlDataResult(res.ToList());
+        }
+
+        private void InnerJoin()
+        {
+            var result = from stu in StudentList
+                         join sta in StandardList
+                         on stu.StandardID equals sta.StandardID
+                         select new
+                         {
+                             StudentName = stu.StudentName,
+                             StandardName = sta.StandardName
+                         };
+            ControlDataResult(result.ToList());
+        }
+
+        #endregion
 
         #endregion
 
