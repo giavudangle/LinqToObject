@@ -14,21 +14,33 @@ namespace LinqToObject
     {
         #region MockData
         List<Standard> standardList = new List<Standard>() {
-        new Standard(){ StandardID = 1, StandardName="Standard 1"},
-        new Standard(){ StandardID = 2, StandardName="Standard 2"},
-        new Standard(){ StandardID = 3, StandardName="Standard 3"}
+        new Standard(){ StandardID = 1, StandardName="Go to school by Ducati"},
+        new Standard(){ StandardID = 2, StandardName="Sleep in hotel"},
+        new Standard(){ StandardID = 3, StandardName="Eat in Restauntrant"},
+        new Standard(){ StandardID = 4, StandardName="Can talk with Ronaldo"},
+        new Standard(){ StandardID = 5, StandardName="Nice drink everyday"},
+        new Standard(){ StandardID = 99, StandardName="Best soccer student"},
+        new Standard(){ StandardID = 77, StandardName="1 bottle milk"},
+        new Standard(){ StandardID = 66, StandardName="1 milktea"}
         };
 
         List<Student> studentList = new List<Student>()
         {
-                new Student() { StudentID = 1, StudentName = "John", Age = 18, StandardID = 1 } ,
-                new Student() { StudentID = 2, StudentName = "Steve",  Age = 21, StandardID = 1 } ,
+                new Student() { StudentID = 1, StudentName = "Wukong", Age = 18, StandardID = 1 } ,
+                new Student() { StudentID = 2, StudentName = "Bat",  Age = 21, StandardID = 1 } ,
                 new Student() { StudentID = 3, StudentName = "Bill",  Age = 18, StandardID = 2 } ,
+                new Student() { StudentID = 3, StudentName = "Blitz",  Age = 18, StandardID = 3 } ,
                 new Student() { StudentID = 4, StudentName = "Ram" , Age = 20, StandardID = 2 } ,
-                new Student() { StudentID = 4, StudentName = "Gaga" , Age = 20, StandardID = 2 },
-                new Student() { StudentID = 3, StudentName = "Gaga" , Age = 20, StandardID = 2 },
-                new Student() { StudentID = 3, StudentName = "Haga" , Age = 20, StandardID = 10 },
-                new Student() { StudentID = 5, StudentName = "Ron" , Age = 21 }
+                new Student() { StudentID = 4, StudentName = "Gaga" , Age = 20, StandardID = 4 },
+                new Student() { StudentID = 3, StudentName = "Kayn" , Age = 20, StandardID = 4 },
+                new Student() { StudentID = 3, StudentName = "Lee" , Age = 25, StandardID = 10 },
+                new Student() { StudentID = 3, StudentName = "Xuka" , Age = 17, StandardID = 5 },
+                new Student() { StudentID = 3, StudentName = "Lux" , Age = 17, StandardID = 5 },
+                new Student() { StudentID = 3, StudentName = "Ezreal" , Age = 25, StandardID = 10 },
+                new Student() { StudentID = 3, StudentName = "Kelvin" , Age = 29, StandardID = 88 },
+                new Student() { StudentID = 5, StudentName = "Gath" , Age = 21 ,StandardID=44},
+                new Student() { StudentID = 5, StudentName = "Moon" , Age = 21 ,StandardID=12},
+                new Student() { StudentID = 5, StudentName = "Laza" , Age = 21 ,StandardID=20}
         };
 
         internal List<Student> StudentList { get => studentList; set => studentList = value; }
@@ -153,7 +165,6 @@ namespace LinqToObject
         #endregion
 
         #region Methods
-
         #region Common methods
         private void LoadDataDisplay()
         {
@@ -190,7 +201,7 @@ namespace LinqToObject
                 ControlDataResult(result.ToList());
             }else
             {
-                MessageBox.Show("Vui lòng nhập StudentID");
+                MessageBox.Show("You must fill StudentID");
             }
         }
 
@@ -290,7 +301,7 @@ namespace LinqToObject
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập dữ liệu");
+                MessageBox.Show("Vui lòng nhập đủ dữ liệu");
             }
 
         }
@@ -625,7 +636,6 @@ namespace LinqToObject
 
 
         #endregion
-
         #region Left-Right(Outer Join) - Inner Join
 
         private void LeftJoin()
@@ -637,22 +647,46 @@ namespace LinqToObject
              * thành 1 collections mới nhét vào record
              * cho s chạy trong record (để mặc định nếu record empty)
              * select new collections pass về res
+             *  Left join bảng StandardList với StudentList
+             * Dù không match thì StandardList vẫn sẽ lấy hết ( bảng trái )
+             * StudentList không match sẽ ra <NOT MATCHING>
              */
 
+
+            /*Query expression */
+            //var res = from sta in StandardList
+            //          join s in StudentList
+            //          on sta.StandardID equals s.StandardID
+            //          into record
+            //          from s in record.DefaultIfEmpty()
+            //          select new
+            //          {
+            //              StandardName = sta.StandardName,
+            //              StudentName = (s == null)
+            //              ? "<NOT MATCHING>"
+            //              : s.StudentName
+            //          };
             ControlDataResult(null);
-            var joinResult = from sta in StandardList
-                             join s in StudentList
-                             on sta.StandardID equals s.StandardID
-                             into record
-                                 from s in record.DefaultIfEmpty()
-                                 select new
-                                 {
-                                     StandardName = sta.StandardName,
-                                     StudentName = s == null
-                                     ? "Not matching"
-                                     : s.StudentName
-                                 };
-            ControlDataResult(joinResult.ToList());
+            /* Lambada expression*/
+            var res = StandardList
+                    .GroupJoin(
+                        StudentList,
+                        sta => sta.StandardID,
+                        stu => stu.StandardID,
+                        (sta, stuGroup) => new
+                        {
+                            sta,
+                            stuGroup
+                        })
+                        .SelectMany(
+                            tempSta => tempSta.stuGroup.DefaultIfEmpty(),
+                            (tempSta, stu) => new
+                            {
+                                StandardName = tempSta.sta.StandardName,
+                                StudentName = (stu == null) ? "<NOT MATCHING>" : stu.StudentName,
+
+                            });
+            ControlDataResult(res.ToList());
         }
 
         private void RightJoin()
@@ -672,8 +706,9 @@ namespace LinqToObject
                     temp => temp.staGroup.DefaultIfEmpty(),
                     (temp, sta) => new
                     {
-                        StandardName = (sta == null) ? "Not Matching" : sta.StandardName,
-                        StudentName = temp.stu.StudentName
+                        StandardName = (sta == null) ? "<NOT MATCHING>" : sta.StandardName,
+                        StudentName = temp.stu.StudentName,
+                        
                     }
                 );                              
             ControlDataResult(res.ToList());
